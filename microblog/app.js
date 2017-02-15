@@ -40,17 +40,14 @@ app.dynamicHelpers({
 });
 
 // Routes
-
 app.get('/', routes.index);
-app.get('/hello',routes.hello);
-app.get('/user/:username', function(req, res){
-  res.send('user: ' + req.params.username);
-})
-app.get('/helper', function(req,res) {
-  res.render('helper', {
-    title: 'Helpers'
-  });
-});
+app.get('/u/:user', routes.user);
+app.post('/post', routes.post);
+app.get('/reg', routes.reg);
+app.post('/reg', routes.doReg);
+app.get('/login', routes.login);
+app.post('/login', routes.doLogin);
+app.get('/logout', routes.logout);
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

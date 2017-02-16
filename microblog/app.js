@@ -8,6 +8,8 @@ var express = require('express')
 
 var app = module.exports = express.createServer();
 var util = require('util');
+//var MongoStore = require('connect-mongo');
+//var settings = require('./settings');
 
 // Configuration
 
@@ -16,7 +18,14 @@ app.configure(function(){
   app.set('view engine', 'ejs');
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(app.router);
+  //app.use(express.cookieParser());
+  //app.use(express.session({
+  //   secret: settings.cookieSecret,
+  //   store: new MongoStore({
+  //     db: settings.db
+  //   })
+  // }));
+  app.use(express.router(routes));
   app.use(express.static(__dirname + '/public'));
 });
 
@@ -39,15 +48,7 @@ app.dynamicHelpers({
   }
 });
 
-// Routes
-app.get('/', routes.index);
-app.get('/u/:user', routes.user);
-app.post('/post', routes.post);
-app.get('/reg', routes.reg);
-app.post('/reg', routes.doReg);
-app.get('/login', routes.login);
-app.post('/login', routes.doLogin);
-app.get('/logout', routes.logout);
+
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

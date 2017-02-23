@@ -32,14 +32,25 @@ function upload(req, res) {
     var form = new formidable.IncomingForm()
     
     form.on('field', function(field, value) {
+//  form.on('field', function(name, value) {}); 每当一个字段/值对已经收到时会触发该事件
         console.log(field);
         console.log(value);
     });
     form.on('file', function(name, file) {
+// form.on('file', function(name, file) {}); 每当有一对字段/文件已经接收到，便会触发该事件
         console.log(name);
         console.log(file);
+// formidable.File对象
+// A.file.size = 0 上传文件的大小，如果文件正在上传，表示已上传部分的大小
+// B.file.path = null 上传文件的路径。如果不想让formidable产生一个临时文件夹，可以在fileBegain事件中修改路径
+// C.file.name = null 上传文件的名字
+// D.file.type = null 上传文件的mime类型
+// E.file.lastModifiedDate = null 时间对象，上传文件最近一次被修改的时间
+// F.file.hash = null 返回文件的hash值
+// G.可以使用JSON.stringify(file.toJSON())来格式化输出文件的信息
     });
     form.on('progress', function(bytesReceived, bytesExpected) {
+//  form.on('progress', function(bytesReceived, bytesExpected) {}); 当有数据块被处理之后会触发该事件，对于创建进度条非常有用。
         var percent = Math.floor(bytesReceived / bytesExpected * 100);
         console.log(percent);
     });

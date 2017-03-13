@@ -6,7 +6,8 @@
     "start": "node app"
   },
   "dependencies": {
+    "ejs": "*",
     "express": "3.0.0",
-    "ejs": "*"
+    "mongoose": "^4.8.7"
   }
 }

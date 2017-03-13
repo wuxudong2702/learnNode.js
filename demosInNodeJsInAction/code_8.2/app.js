@@ -31,6 +31,8 @@ app.configure('development', function(){
 
 app.get('/', photos.list);
 app.get('/users', user.list);
+app.get('/upload', photos.form);
+app.post('/upload', photos.submit(app.get('photos')));
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

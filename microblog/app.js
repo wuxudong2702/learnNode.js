@@ -20,9 +20,13 @@ var sessionStore = new MongoStore({
 var app = express();
 
 app.configure(function(){
+// app.set(name, value)
+// 将设置项name的值设置为value	
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', __dirname + '/views');
 	app.set('view engine', 'ejs');
+// app.use([path], function)
+// 使用中间件 function，可选参数 path 默认是 “/”。
 // app.use()用于注册中间件，注册后的函数会在请求到来时按顺序执行
 	app.use(partials());
 	app.use(flash());
@@ -43,6 +47,13 @@ app.configure(function(){
 
 	app.use(app.router);
 	app.use(express.static(__dirname + '/public'));
+// express.static(root, [options])
+// express.static 是 Express 内置的唯一一个中间件。
+// 通过 Express 内置的 express.static 可以方便地托管静态文件，例如图片、CSS、JavaScript 文件等。
+// 将静态资源文件所在的目录作为参数传递给 express.static 中间件就可以提供静态资源文件的访问了。例如，假设在 public 目录放置了图片、CSS 和 JavaScript 文件，你就可以：
+// app.use(express.static('public'));
+// 现在，public 目录下面的文件就可以访问了。
+// http://localhost:3000/images/kitten.jpg
 });
 
 app.configure('development', function(){
@@ -55,8 +66,16 @@ app.configure('development', function(){
 // }
 // 就是等价的
 	app.use(express.errorHandler());
+// errorHandler能捕获所有类型的错误，其定义如下:
+// function errorHandler(err, req, res, next) {
+//   res.status(500);
+//   res.render('error', { error: err });
+// }
 });
 
+// app.get()
+// 弱调用app.get()时只有一个参数，则认为是取设置值，否则认为是注册路由
+// app.get('/',function(){})；是对中间件app.router进行配置(包括app.post(),app.all()等)
 app.get('/', routes.index);
 app.get('/u/:user', routes.user);
 app.post('/post', routes.post);

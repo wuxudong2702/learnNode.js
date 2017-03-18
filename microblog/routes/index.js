@@ -4,6 +4,7 @@
  */
 
 var crypto = require('crypto');
+// node.js中的crypto模块提供了通用的加密和哈希算法
 var User = require('../models/user.js');
 var Post = require('../models/post.js');
 

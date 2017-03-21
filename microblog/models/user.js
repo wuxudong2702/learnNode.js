@@ -1,43 +1,38 @@
 var mongodb = require('./db');
 
 function User(user) {
-	this.name = user.name;
-	this.password = user.password;
+    this.name = user.name;
+    this.password = uesr.password;
 };
 
 module.exports = User;
 
 User.prototype.save = function save(callback) {
-	var user = {
-		name: this.name,
-		password: this.password,
-	};
-	
-	mongodb.open(function(err, db) {
-		if (err) {
-		  return callback(err);
-		}
+    var user = {
+        name: this.name,
+        password: this.password
+    };
+    mongodb.open(function(err, db) {
+        if(err) {
+            return callback(err);
+        }
 
-		//获取users集合
-		db.collection('users', function(err, collection) {
-			if (err) {
-				mongodb.close();
-				return callback(err);
-			}
+        db.collection('users', function(err, collection) {
+            if(err) {
+                mongodb.close();
+                return callback(err);
+            }
+            collection.ensureIndex('name', { unique: true});
 
-			//为name属性添加索引
-			collection.ensureIndex('name', {unique: true});
-
-			//save
-			collection.insert(user, {safe: true}, function(err, user) {
-				mongodb.close();
-				callback(err, user);
-			});
-		});
-	});
+            collection.insert(user, { safe: true }, function(err, user) {
+                mongodb.close();
+                callback(err, user);
+            });
+        });
+    });
 };
 
-User.get = function get(username, callback) {
+User.prototype.get = function get(username, callback) {
 	mongodb.open(function(err, db) {
 		if (err) {
 			return callback(err);

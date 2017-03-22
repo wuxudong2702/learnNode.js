@@ -1,15 +1,17 @@
 {
-  "name": "application-name",
-  "version": "0.0.1",
+  "name": "microblog",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app"
+    "start": "node ./bin/www"
   },
   "dependencies": {
-    "express": "3.0.0",
-    "ejs": "*",
-    "connect-mongo" : "*",
-    "connect-flash" : "*",
-	  "mongodb" : "*"
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "ejs": "~2.5.5",
+    "express": "~4.14.1",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.2"
   }
 }

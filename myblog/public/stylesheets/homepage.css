@@ -23,3 +23,9 @@ nav {
     bottom: 20px;
     font-size: 20px;
 }
+
+#essay {
+    width: 90%;
+    height: 800px;
+    margin: 20px auto;
+}

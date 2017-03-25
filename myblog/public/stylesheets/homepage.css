@@ -26,6 +26,9 @@ nav {
 
 #essay {
     width: 90%;
-    height: 800px;
     margin: 20px auto;
+}
+
+#essay-item > pre {
+    white-space: pre-wrap;
 }

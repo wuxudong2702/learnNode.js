@@ -10,13 +10,27 @@ router.get('/essay', function(req, res, next) {
     if(err) throw err;
     essays.forEach(function(essay) {
       essay.content = marked(essay.content);
-      console.log(essay.content);
+      essay.content = essay.content.slice(0,140);
+      essay.address = '<a href="http://localhost:3000/home/essay/' + essay._id + '">';
     });
+
     res.render('homepage', {
       essays: essays
-    })
+    });
   });
   
 });
 
+router.get('/essay/:id', function(req, res, next) {
+  id = req.params.id;
+  Essay.find({"_id" : id}).exec(function(err, essays) {
+    if(err) throw err;
+    essays.forEach(function(essay) {
+      essay.content = marked(essay.content);
+    });
+  res.render('homepage', {
+    essays: essays
+  });
+  });
+});
 module.exports = router;

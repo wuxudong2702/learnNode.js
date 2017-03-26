@@ -20,6 +20,6 @@ router.post('/', function(req, res, next) {
     if(err) throw err;
     console.log('meow');
   })
-  res.redirect('/admin'); 
+  res.redirect('../home/essay'); 
 })
 module.exports = router;

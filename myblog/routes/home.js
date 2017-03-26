@@ -10,8 +10,11 @@ router.get('/essay', function(req, res, next) {
     if(err) throw err;
     essays.forEach(function(essay) {
       essay.content = marked(essay.content);
-      essay.content = essay.content.slice(0,140);
-      essay.address = '<a href="http://localhost:3000/home/essay/' + essay._id + '">';
+      if(essay.content.length > 250) {
+      essay.content = essay.content.slice(0,140) 
+      + `<br/><a href="http://localhost:3000/home/essay/${essay._id}">......查看全文</a>`;
+      };
+      essay.address = `<a href="http://localhost:3000/home/essay/${essay._id}">`;
     });
 
     res.render('homepage', {

@@ -1,0 +1,20 @@
+<!DOCTYPE>
+<head>
+    <title>Admin</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/admin.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/semantic.min.css">
+</head>
+<body>
+    <div ui stacked segment>
+        欢迎使用后台管理系统
+    </div>
+    <form class="ui form" method="post" enctype="mutipart/form/data" action="/login">
+            <div class="field">
+            <label>帐号</label>
+            <input type="text" name="account">
+            <label>密码</label>
+            <input type="text" name="password">
+            </div>
+            <input type="submit" class="ui secondary button" value="登录">
+    </form>
+</body>

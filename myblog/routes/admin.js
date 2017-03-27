@@ -2,9 +2,17 @@ const express = require('express');
 const Essay = require('../models/essay');
 const router = express.Router();
 
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
+  res.render('login');
+});
+router.post('/login', function(req, res, next) {
+  res.redirect('/publish'); 
+})
+
+router.get('/publish', function(req, res) {
   res.render('admin');
 });
+
 
 router.post('/', function(req, res, next) {
   var title = req.body.title;

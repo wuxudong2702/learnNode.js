@@ -1,19 +1,26 @@
 <!DOCTYPE>
 <head>
     <title>Admin</title>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/admin.css">
     <link rel="stylesheet" type="text/css" href="/stylesheets/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/admin.css">
 </head>
 <body>
-    <form class="ui form" method="post" enctype="mutipart/form/data" action="/publish">
-            <div class="field">
-            <label>标题</label>
-            <input type="text" name="title">
-            <label>标签</label>
-            <input type="text" name="tags">
-            <label>正文</label>
-            <textarea name="content" rows="15"></textarea>
-            </div>
-            <input type="submit" class="ui secondary button" value="Publish">
-    </form>
+    <div class="ui segment">
+      <div class="ui secondary menu" id="menu">
+          <a href="/api/add" class="item">Add Essay</a>
+      </div>
+      <div class="ui divided list">
+          <h2>文章列表</h2>
+            <% lists.forEach(function(list) { %>
+               <div class="item">
+               <h3 class="header"><%= list.title %></h4>
+               <div class="ui primary button in"><%- list.editURL %></div>
+               <div class="ui secondary button in"><%- list.delURL %></div>
+                   <div class="description">
+                        <%= list.content %>
+                   </div>
+               </div>
+            <% }) %>
+        </div>
+    </div>
 </body>

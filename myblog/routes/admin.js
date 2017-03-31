@@ -1,32 +1,26 @@
 const express = require('express');
 const Essay = require('../models/essay');
-const crypto = require('crypto');
 const router = express.Router();
 
-const decipher = crypto.createDecipher('base64');
-
 router.get('/', function(req, res) {
-  res.render('login');
-});
-
-router.post('/login', function(req, res, next) {
-  var account = req.body.account;
-  var password = req.body.password;
-  var essay = new Essay();
-  Essay.find({'user': account}).exec(function (err, user) {
+  Essay.find({}).exec(function(err, lists) {
     if(err) throw err;
-    if(decipher.update(password) === user.password) {
-      res.redirect('/publish'); 
-    }else{
-      alert("密码错误");
-    }
-  });
+    lists.forEach(function(list) {
+      list.content = list.content.slice(0,40);
+      list.editURL = `<a href='/api/edit/${list._id}'>编辑</a>`;
+      list.delURL = `<a href='/api/del/${list._id}'>删除</a>`;
+    });
+    res.render('admin', {
+      lists: lists
+    });
+  }); 
 });
 
-router.get('/publish', function(req, res) {
-  res.render('admin');
+router.get('/add', function(req, res) {
+  res.render('add');
 });
-router.post('/', function(req, res, next) {
+
+router.post('/add', function(req, res, next) {
   var title = req.body.title;
   var tags = req.body.tags;
   var content = req.body.content;

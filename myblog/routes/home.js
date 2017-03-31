@@ -5,7 +5,7 @@ const Essay = require('../models/essay');
 const router = express.Router();
 
 /* GET users listing. */
-router.get('/essay', function(req, res, next) {
+router.get('/essay', function(req, res) {
   Essay.find({}).exec(function(err, essays) {
     if(err) throw err;
     essays.forEach(function(essay) {
@@ -24,7 +24,7 @@ router.get('/essay', function(req, res, next) {
   
 });
 
-router.get('/essay/:id', function(req, res, next) {
+router.get('/essay/:id', function(req, res) {
   id = req.params.id;
   Essay.find({"_id" : id}).exec(function(err, essays) {
     if(err) throw err;

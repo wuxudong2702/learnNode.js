@@ -1,0 +1,44 @@
+<!DOCTYPE>
+<head>
+    <title>Dawning Lee</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/homepage.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/semantic.min.css">
+</head>
+<body>
+<nav>
+    <div id="title">
+        Dawning Lee's 
+    </div>
+    <div class="ui secondary menu" id="menu">
+        <a href="/home/essay" class="active item">Essay</a>
+        <a href="/album" class="item">Album</a>
+        <a href="/bujo" class="item">Bujo</a>
+    </div>
+</nav>
+<div id="essay-item" class="ui piled segment">
+        <h2><%- essay.address %><%= essay.title %></a></h2>
+        <p><%= essay.create_time %></p>
+        <pre><%- essay.content %></pre>
+</div>
+<% essay.comments.forEach(function(comment) { %>
+     <div class="comment">
+         <div class="content">
+             <a class="author">
+                 <% if(comment.reply_id) { %>
+                    <%= comment.name %> 对 <%= comment.replyname %>
+                 <% } else { %>
+                     <%= comment.name %>
+                 <% } %>
+             </a>
+             <div class="metadata">
+                <span>comment.comment_time</span>
+             </div>            
+             <div class="text">comment.comment_content</div>
+             <div class="actions">
+                <a class="reply">Reply</a>
+             </div>
+         </div>
+     </div>
+<% }) %>
+</body>
+    

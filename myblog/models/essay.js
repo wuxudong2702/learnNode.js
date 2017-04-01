@@ -6,7 +6,13 @@ var essaySchema = new mongoose.Schema({
     create_time: Date,
     update_time: Date,
     content: String,
-    tag: [String]
+    tag: [String],
+    comments: [{
+        name: String,
+        comment_content: String,
+        create_time: Date,
+        reply_id: String
+    }]
 });
 
 var Essay = mongoose.model('Essay', essaySchema);

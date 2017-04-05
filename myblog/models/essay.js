@@ -10,7 +10,7 @@ var essaySchema = new mongoose.Schema({
     comments: [{
         name: String,
         comment_content: String,
-        create_time: Date,
+        comment_time: Date,
         reply_id: String
     }]
 });
